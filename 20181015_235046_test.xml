@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="cudnn_test" tests="1" failures="0" errors="1">
+    <testcase name="cudnn_test" status="run" duration="13" time="13"><error message="exited with error code 139"></error></testcase>
+    <system-out><![CDATA[WARNING: Logging before InitGoogleLogging() is written to STDERR
+I1015 23:50:34.379765  6290 cudnn_util.cc:68] Running cuDNN v7.4.0 for CUDA 10.0.10 on GeForce RTX 2080
+[==========] Running 7839 tests from 7 test cases.
+[----------] Global test environment set-up.
+[----------] 3 tests from ConvolutionTest
+[ RUN      ] ConvolutionTest.GetWorkspaceSize_Overflow
+[       OK ] ConvolutionTest.GetWorkspaceSize_Overflow (1 ms)
+[ RUN      ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range
+cudnn_test.cc:150: Failure
+Value of: IsOk(GetStatus(cudnnGetConvolutionNdDescriptor( conv_desc.get(), array_length_requested, &rank, pad, stride, dilation, &convolution_mode, &compute_type)) << " array_length_requested = " << array_length_requested)
+  Actual: false (cuDNN error 'CUDNN_STATUS_NOT_SUPPORTED' array_length_requested = 7)
+Expected: true
+cudnn_test.cc:150: Failure
+Value of: IsOk(GetStatus(cudnnGetConvolutionNdDescriptor( conv_desc.get(), array_length_requested, &rank, pad, stride, dilation, &convolution_mode, &compute_type)) << " array_length_requested = " << array_length_requested)
+  Actual: false (cuDNN error 'CUDNN_STATUS_NOT_SUPPORTED' array_length_requested = 8)
+Expected: true
+[  FAILED  ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range (0 ms)
+[ RUN      ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim
+[       OK ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim (0 ms)
+[----------] 3 tests from ConvolutionTest (1 ms total)
+
+[----------] 24 tests from FromFile/ConvolutionTest
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported (4 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect (151 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails (159 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7 (447 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/BlendResult
+[       OK ] FromFile/ConvolutionTest.CompareResults/BlendResult (4 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution
+[       OK ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GarbageInWorkspace
+[       OK ] FromFile/ConvolutionTest.CompareResults/GarbageInWorkspace (868 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect (180 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_BWD_FILTER_PrecisionLoss
+cudnn_conv_test.cc:457: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (11 elements differ more than 0.1. Largest differences:
+[1900]: 0.575195 vs -0.0741577, error = 0.412237
+[408]: 0.616699 vs 1.33594, error = 0.307901
+[1856]: -0.835449 vs -0.425293, error = 0.223464
+[3975]: 4.03906 vs 3.14453, error = 0.177519
+[2565]: -0.927246 vs -1.32129, error = 0.169752
+[3353]: 2.98242 vs 2.33008, error = 0.163806
+[3813]: -1.08398 vs -1.48535, error = 0.161493
+[1898]: 1.03223 vs 1.33398, error = 0.129289)
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_0
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/NHWC_BWD_FILTER_PrecisionLoss, where GetParam() = 
+reference {
+  input {
+    dimension: 128
+    dimension: 64
+    dimension: 56
+    dimension: 56
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    dimension: 64
+    dimension: 64
+    dimension: 1
+    dimension: 1
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  convolution {
+    filter_stride: 1
+    filter_stride: 1
+    compute_mode: DATA_FLOAT
+    mode: CROSS_CORRELATION
+    math_type: DEFAULT_MATH
+  }
+  output {
+    dimension: 128
+    dimension: 64
+    dimension: 56
+    dimension: 56
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  bwd_filter_algo: CONVOLUTION_BWD_FILTER_ALGO_0
+  label: "NHWC_BWD_FILTER_PrecisionLoss"
+}
+test {
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+test {
+  convolution {
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+values_lower_bound: -1
+values_upper_bound: 1
+ (20 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/FlakyMismatch
+[       OK ] FromFile/ConvolutionTest.CompareResults/FlakyMismatch (117 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_TRUE_HALF_CONFIG_Unsupported
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_TRUE_HALF_CONFIG_Unsupported (6 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_FLOAT_CONFIG_InternalError
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_FLOAT_CONFIG_InternalError (4 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_PSEUDO_HALF_CONFIG_Crash
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_PSEUDO_HALF_CONFIG_Crash (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7 (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/BlendResult
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/BlendResult (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/GroupedConvolution
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/GroupedConvolution (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/GarbageInWorkspace
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/GarbageInWorkspace (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_BWD_FILTER_PrecisionLoss
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_BWD_FILTER_PrecisionLoss (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/FlakyMismatch
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/FlakyMismatch (1 ms)
+[----------] 24 tests from FromFile/ConvolutionTest (1978 ms total)
+
+[----------] 1710 tests from Conv2dFilter3x3/ConvolutionTest
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_FLOAT_1x477x259x1_9x477x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_FLOAT_1x477x259x1_9x477x3x3_SAME (5 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_FLOAT_1x477x259x1_9x477x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_FLOAT_1x477x259x1_9x477x3x3_SAME (3 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_FLOAT_1x477x259x1_9x477x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_FLOAT_1x477x259x1_9x477x3x3_SAME (4 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_3x20x71x38_2033x20x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_3x20x71x38_2033x20x3x3_SAME (543 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_3x20x71x38_2033x20x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_3x20x71x38_2033x20x3x3_SAME (45 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_3x20x71x38_2033x20x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_3x20x71x38_2033x20x3x3_SAME (28 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_PSEUDO_HALF_82x1x1x9_758x1x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_PSEUDO_HALF_82x1x1x9_758x1x3x3_SAME (16 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_PSEUDO_HALF_82x1x1x9_758x1x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_PSEUDO_HALF_82x1x1x9_758x1x3x3_SAME (6 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_PSEUDO_HALF_82x1x1x9_758x1x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_PSEUDO_HALF_82x1x1x9_758x1x3x3_SAME (2 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_8x1x564x119_34x1x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_8x1x564x119_34x1x3x3_VALID (487 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_8x1x564x119_34x1x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_8x1x564x119_34x1x3x3_VALID (49 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_8x1x564x119_34x1x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_8x1x564x119_34x1x3x3_VALID (24 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_2x23x5x180_9x23x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_2x23x5x180_9x23x3x3_SAME (2 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_TENSOR_OP_2x23x5x180_9x23x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_TENSOR_OP_2x23x5x180_9x23x3x3_SAME (3 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TENSOR_OP_2x23x5x180_9x23x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TENSOR_OP_2x23x5x180_9x23x3x3_SAME (2 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_238x220x1x420_6x220x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_238x220x1x420_6x220x3x3_SAME (73 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_238x220x1x420_6x220x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_238x220x1x420_6x220x3x3_SAME (272 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_238x220x1x420_6x220x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_238x220x1x420_6x220x3x3_SAME (48 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_44x7x54x3_209x7x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_44x7x54x3_209x7x3x3_SAME (47 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_44x7x54x3_209x7x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_44x7x54x3_209x7x3x3_SAME (7 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_44x7x54x3_209x7x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_44x7x54x3_209x7x3x3_SAME (3 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_FLOAT_1712x14x43x25_6x14x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_FLOAT_1712x14x43x25_6x14x3x3_VALID (1096 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_FLOAT_1712x14x43x25_6x14x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_FLOAT_1712x14x43x25_6x14x3x3_VALID (2157 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_FLOAT_1712x14x43x25_6x14x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_FLOAT_1712x14x43x25_6x14x3x3_VALID (121 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_FLOAT_15x23x82x677_28x23x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_FLOAT_15x23x82x677_28x23x3x3_SAME (2128 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_FLOAT_15x23x82x677_28x23x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_FLOAT_15x23x82x677_28x23x3x3_SAME (1476 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_FLOAT_15x23x82x677_28x23x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_FLOAT_15x23x82x677_28x23x3x3_SAME (105 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TRUE_HALF_359x5x25x823_1x5x3x3_VALID]]></system-out>
+  </testsuite>
+</testsuites>
