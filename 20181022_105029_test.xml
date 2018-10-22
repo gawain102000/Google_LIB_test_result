@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="cudnn_test" tests="1" failures="0" errors="1">
+    <testcase name="cudnn_test" status="run" duration="16" time="16"><error message="exited with error code 134"></error></testcase>
+    <system-out><![CDATA[WARNING: Logging before InitGoogleLogging() is written to STDERR
+I1015 22:44:40.510988  7729 cudnn_util.cc:68] Running cuDNN v7.4.0 for CUDA 10.0.10 on Quadro RTX 5000
+[==========] Running 7875 tests from 7 test cases.
+[----------] Global test environment set-up.
+[----------] 3 tests from ConvolutionTest
+[ RUN      ] ConvolutionTest.GetWorkspaceSize_Overflow
+[       OK ] ConvolutionTest.GetWorkspaceSize_Overflow (1 ms)
+[ RUN      ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range
+cudnn_test.cc:150: Failure
+Value of: IsOk(GetStatus(cudnnGetConvolutionNdDescriptor( conv_desc.get(), array_length_requested, &rank, pad, stride, dilation, &convolution_mode, &compute_type)) << " array_length_requested = " << array_length_requested)
+  Actual: false (cuDNN error 'CUDNN_STATUS_NOT_SUPPORTED' array_length_requested = 7)
+Expected: true
+cudnn_test.cc:150: Failure
+Value of: IsOk(GetStatus(cudnnGetConvolutionNdDescriptor( conv_desc.get(), array_length_requested, &rank, pad, stride, dilation, &convolution_mode, &compute_type)) << " array_length_requested = " << array_length_requested)
+  Actual: false (cuDNN error 'CUDNN_STATUS_NOT_SUPPORTED' array_length_requested = 8)
+Expected: true
+[  FAILED  ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range (0 ms)
+[ RUN      ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim
+[       OK ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim (0 ms)
+[----------] 3 tests from ConvolutionTest (1 ms total)
+
+[----------] 24 tests from FromFile/ConvolutionTest
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported (17 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError (8 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash (5 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect (192 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails (159 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7 (540 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/BlendResult
+[       OK ] FromFile/ConvolutionTest.CompareResults/BlendResult (132 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution
+[       OK ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution (83 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GarbageInWorkspace
+[       OK ] FromFile/ConvolutionTest.CompareResults/GarbageInWorkspace (1473 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect (2110 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_BWD_FILTER_PrecisionLoss
+cudnn_conv_test.cc:457: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (22 elements differ more than 0.1. Largest differences:
+[2575]: -0.714355 vs -0.119019, error = 0.347266
+[1856]: -0.518066 vs -0.112793, error = 0.266967
+[1360]: -0.606934 vs -0.24231, error = 0.226907
+[405]: 0.84375 vs 0.432861, error = 0.222855
+[408]: 0.541992 vs 0.211182, error = 0.214535
+[4092]: 0.697266 vs 0.387451, error = 0.182537
+[837]: 3.91797 vs 4.84766, error = 0.158985
+[1898]: 0.738281 vs 0.462158, error = 0.158848)
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_0
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/NHWC_BWD_FILTER_PrecisionLoss, where GetParam() = 
+reference {
+  input {
+    dimension: 128
+    dimension: 64
+    dimension: 56
+    dimension: 56
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    dimension: 64
+    dimension: 64
+    dimension: 1
+    dimension: 1
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  convolution {
+    filter_stride: 1
+    filter_stride: 1
+    compute_mode: DATA_FLOAT
+    mode: CROSS_CORRELATION
+    math_type: DEFAULT_MATH
+  }
+  output {
+    dimension: 128
+    dimension: 64
+    dimension: 56
+    dimension: 56
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  bwd_filter_algo: CONVOLUTION_BWD_FILTER_ALGO_0
+  label: "NHWC_BWD_FILTER_PrecisionLoss"
+}
+test {
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+test {
+  convolution {
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+values_lower_bound: -1
+values_upper_bound: 1
+ (105 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/FlakyMismatch
+[       OK ] FromFile/ConvolutionTest.CompareResults/FlakyMismatch (2111 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_TRUE_HALF_CONFIG_Unsupported
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_TRUE_HALF_CONFIG_Unsupported (6 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_FLOAT_CONFIG_InternalError
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_FLOAT_CONFIG_InternalError (5 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_PSEUDO_HALF_CONFIG_Crash
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_PSEUDO_HALF_CONFIG_Crash (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7 (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/BlendResult
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/BlendResult (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/GroupedConvolution
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/GroupedConvolution (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/GarbageInWorkspace
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/GarbageInWorkspace (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_BWD_FILTER_PrecisionLoss
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_BWD_FILTER_PrecisionLoss (2 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/FlakyMismatch
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/FlakyMismatch (2 ms)
+[----------] 24 tests from FromFile/ConvolutionTest (6964 ms total)
+
+[----------] 1704 tests from Conv2dFilter3x3/ConvolutionTest
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID (64 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID (25 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID (133 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID (515 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID (1037 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID (413 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_FLOAT_3x1365x116x8_501x1365x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_FLOAT_3x1365x116x8_501x1365x3x3_VALID (482 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_FLOAT_3x1365x116x8_501x1365x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_FLOAT_3x1365x116x8_501x1365x3x3_VALID (330 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_FLOAT_3x1365x116x8_501x1365x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_FLOAT_3x1365x116x8_501x1365x3x3_VALID (499 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_8x8x36x515_7x8x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_TRUE_HALF_8x8x36x515_7x8x3x3_SAME (63 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_8x8x36x515_7x8x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_TRUE_HALF_8x8x36x515_7x8x3x3_SAME (45 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_8x8x36x515_7x8x3x3_SAME
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_TRUE_HALF_8x8x36x515_7x8x3x3_SAME (30 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_PSEUDO_HALF_19x1x46x13_61x1x3x3_VALID
+[       OK ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_PSEUDO_HALF_19x1x46x13_61x1x3x3_VALID (106 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_PSEUDO_HALF_19x1x46x13_61x1x3x3_VALID
+F1015 22:44:52.320086  7729 cuda_util.cc:92] Check failed: OkStatus() == GetStatus(cudaFree(ptr_)) (ok vs. CUDA Runtime API error 'an illegal memory access was encountered') 
+*** Check failure stack trace: ***
+    @          0x18230da  google::LogMessage::Fail()
+    @          0x182301e  google::LogMessage::SendToLog()
+    @          0x182296f  google::LogMessage::Flush()
+    @          0x1825dee  google::LogMessageFatal::~LogMessageFatal()
+    @           0x46befb  nvidia_libs_test::DeviceMemory::~DeviceMemory()
+    @           0x40e4a9  _ZN16nvidia_libs_test12_GLOBAL__N_114RunConvolutionEddRKSt10unique_ptrI12cudnnContextNS_6detail18CudnnHandleDeleterEERKNS_11ConvolutionERKN4absl7variantIJ25cudnnConvolutionFwdAlgo_t29cudnnConvolutionBwdDataAlgo_t31cudnnConvolutionBwdFilterAlgo_tEEE
+    @           0x410612  nvidia_libs_test::(anonymous namespace)::ConvolutionTest_CompareResults_Test::TestBody()
+    @          0x1874a67  testing::internal::HandleSehExceptionsInMethodIfSupported<>()
+    @          0x186facf  testing::internal::HandleExceptionsInMethodIfSupported<>()
+    @          0x1854dae  testing::Test::Run()
+    @          0x18556a0  testing::TestInfo::Run()
+    @          0x1855cf5  testing::TestCase::Run()
+    @          0x185ccf1  testing::internal::UnitTestImpl::RunAllTests()
+    @          0x187578f  testing::internal::HandleSehExceptionsInMethodIfSupported<>()
+    @          0x1870705  testing::internal::HandleExceptionsInMethodIfSupported<>()
+    @          0x185b95f  testing::UnitTest::Run()
+    @           0x450c51  RUN_ALL_TESTS()
+    @           0x4504b8  main
+    @     0x7f6b78fcd830  __libc_start_main
+    @           0x40d109  _start
+    @              (nil)  (unknown)]]></system-out>
+  </testsuite>
+</testsuites>
