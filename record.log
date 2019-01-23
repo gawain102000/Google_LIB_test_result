@@ -500,3 +500,4 @@
 20190123_024851_test.xml cudnn::25627326::2019/01/21::google::25549602::2019/01/07::GeForce RTX 2080 Ti::cudnn dev::
 20190123_025111_test.xml cudnn::25627326::2019/01/21::google::25549602::2019/01/07::TITAN V::cudnn dev::
 20190123_031036_test.xml cudnn::25627326::2019/01/21::google::25549602::2019/01/07::Tesla P4::cudnn dev::
+20190123_051706_test.xml cudnn::25630681::2019/01/22::google::25549602::2019/01/07::Tesla V100-DGXS-16GB::cudnn_v7.5::
