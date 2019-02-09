@@ -699,3 +699,4 @@
 20190209_203751_test.xml cudnn::25768526::2019/02/08::google::25549602::2019/01/07::TITAN V::cudnn dev::
 20190209_204411_test.xml cudnn::25768526::2019/02/08::google::25549602::2019/01/07::Quadro RTX 5000::cudnn dev::
 20190209_210931_test.xml cudnn::25768526::2019/02/08::google::25549602::2019/01/07::GeForce RTX 2080 Ti::cudnn dev::
+20190209_214554_test.xml cudnn::25768526::2019/02/08::google::25549602::2019/01/07::Tesla P4::cudnn dev::
