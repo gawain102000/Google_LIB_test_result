@@ -826,3 +826,4 @@
 20190219_211558_test.xml cudnn::25823695::2019/02/18::google::25549602::2019/01/07::Quadro RTX 5000::cudnn dev::
 20190219_214548_test.xml cudnn::25823695::2019/02/18::google::25549602::2019/01/07::Tesla P4::cudnn dev::
 20190221_080344_test.xml cudnn::25553370::2019/01/08::google::25549602::2019/01/07::Quadro GP100::cudnn dev::
+20190221_212153_test.xml cudnn::25838384::2019/02/21::google::25549602::2019/01/07::TITAN V::cudnn dev::
