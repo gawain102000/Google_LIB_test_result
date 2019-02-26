@@ -892,3 +892,4 @@
 20190226_213235_test.xml cudnn::25867468::2019/02/26::google::25549602::2019/01/07::GeForce RTX 2080 Ti::cudnn dev::
 20190226_213615_test.xml cudnn::25867468::2019/02/26::google::25549602::2019/01/07::TITAN V::cudnn dev::
 20190226_220026_test.xml cudnn::25867468::2019/02/26::google::25549602::2019/01/07::Tesla P4::cudnn dev::
+20190226_230446_test.xml cudnn::25868391::2019/02/26::google::25549602::2019/01/07::GeForce RTX 2080 Ti::cudnn_v7.6::
