@@ -971,3 +971,4 @@
 20190306_011455_test.xml cudnn::25905924::2019/03/05::google::25549602::2019/01/07::Tesla P4::cudnn_v7.6::
 20190306_112143_test.xml cudnn::25905924::2019/03/05::google::25549602::2019/01/07::Tesla V100-DGXS-16GB::cudnn_v7.6::
 20190307_050544_test.xml cudnn::25904494::2019/03/05::google::25549602::2019/01/07::GeForce RTX 2080::cudnn dev::
+20190307_051447_test.xml cudnn::25904494::2019/03/05::google::25549602::2019/01/07::GeForce RTX 2080::cudnn dev::
