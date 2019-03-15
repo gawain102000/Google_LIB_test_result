@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="cudnn_test" tests="1" failures="0" errors="1">
+    <testcase name="cudnn_test" status="run" duration="0" time="0"><error message="exited with error code 134"></error></testcase>
+    <system-out><![CDATA[WARNING: Logging before InitGoogleLogging() is written to STDERR
+F0315 08:53:03.517127  6067 cudnn_util.cc:39] Check failed: OkStatus() == GetStatus(cudaGetDeviceCount(&device_count)) (ok vs. CUDA Runtime API error 'no CUDA-capable device is detected') 
+*** Check failure stack trace: ***]]></system-out>
+  </testsuite>
+</testsuites>
