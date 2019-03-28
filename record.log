@@ -1222,3 +1222,4 @@
 20190328_072638_test.xml cudnn::25997700::2019/03/20::google::26002123::2019/03/21::Quadro GP100::cudnn dev::
 20190328_193704_test.xml cudnn::26056281::2019/03/28::google::26002123::2019/03/21::Quadro RTX 5000::cudnn dev::
 20190328_194528_test.xml cudnn::26056281::2019/03/28::google::26002123::2019/03/21::TITAN V::cudnn dev::
+20190328_202404_test.xml cudnn::26056281::2019/03/28::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn dev::
