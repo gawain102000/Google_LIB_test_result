@@ -1324,3 +1324,4 @@
 20190404_194124_test.xml cudnn::26102656::2019/04/03::google::26002123::2019/03/21::TITAN V::cudnn dev::
 20190404_194452_test.xml cudnn::26102656::2019/04/03::google::26002123::2019/03/21::Quadro RTX 5000::cudnn dev::
 20190404_201158_test.xml cudnn::26102656::2019/04/03::google::26002123::2019/03/21::Tesla P4::cudnn dev::
+20190404_214332_test.xml cudnn::26108645::2019/04/04::google::26002123::2019/03/21::Tesla V100-DGXS-16GB::cudnn_v7.6::
