@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="cudnn_test" tests="1" failures="0" errors="1">
+    <testcase name="cudnn_test" status="run" duration="5" time="5"><error message="exited with error code 134"></error></testcase>
+    <system-out><![CDATA[WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0410 10:36:08.097487  7070 cudnn_util.cc:68] Running cuDNN v7.6.0 for CUDA 9.0.20 on Tesla V100-DGXS-16GB
+[==========] Running 7875 tests from 7 test suites.
+[----------] Global test environment set-up.
+[----------] 3 tests from ConvolutionTest
+[ RUN      ] ConvolutionTest.GetWorkspaceSize_Overflow
+[       OK ] ConvolutionTest.GetWorkspaceSize_Overflow (3 ms)
+[ RUN      ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range
+[       OK ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range (1 ms)
+[ RUN      ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim
+[       OK ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim (0 ms)
+[----------] 3 tests from ConvolutionTest (4 ms total)
+
+[----------] 24 tests from FromFile/ConvolutionTest
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported (150 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError (5 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash (4 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect (100 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails (272 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7 (652 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/BlendResult
+[       OK ] FromFile/ConvolutionTest.CompareResults/BlendResult (83 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution
+[       OK ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution (8 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GarbageInWorkspace
+F0410 10:36:11.289971  7070 cuda_util.cc:92] Check failed: OkStatus() == GetStatus(cudaFree(ptr_)) (ok vs. CUDA Runtime API error 'an illegal memory access was encountered') 
+*** Check failure stack trace: ***
+    @          0x18fdffa  google::LogMessage::Fail()
+    @          0x18fdf3e  google::LogMessage::SendToLog()
+    @          0x18fd88f  google::LogMessage::Flush()
+    @          0x1900d0e  google::LogMessageFatal::~LogMessageFatal()
+    @           0x46db27  nvidia_libs_test::DeviceMemory::~DeviceMemory()
+    @           0x40e763  _ZN16nvidia_libs_test12_GLOBAL__N_114RunConvolutionEddRKSt10unique_ptrI12cudnnContextNS_6detail18CudnnHandleDeleterEERKNS_11ConvolutionERKN4absl7variantIJ25cudnnConvolutionFwdAlgo_t29cudnnConvolutionBwdDataAlgo_t31cudnnConvolutionBwdFilterAlgo_tEEE
+    @           0x4109eb  nvidia_libs_test::(anonymous namespace)::ConvolutionTest_CompareResults_Test::TestBody()
+    @          0x1957fff  testing::internal::HandleSehExceptionsInMethodIfSupported<>()
+    @          0x1952561  testing::internal::HandleExceptionsInMethodIfSupported<>()
+    @          0x19301c4  testing::Test::Run()
+    @          0x1930b25  testing::TestInfo::Run()
+    @          0x19311c7  testing::TestSuite::Run()
+    @          0x193cca1  testing::internal::UnitTestImpl::RunAllTests()
+    @          0x1958d9b  testing::internal::HandleSehExceptionsInMethodIfSupported<>()
+    @          0x195346b  testing::internal::HandleExceptionsInMethodIfSupported<>()
+    @          0x193b5d8  testing::UnitTest::Run()
+    @           0x4522e4  RUN_ALL_TESTS()
+    @           0x451a16  main
+    @     0x7f6d1dc78830  __libc_start_main
+    @           0x40d2c9  _start
+    @              (nil)  (unknown)]]></system-out>
+  </testsuite>
+</testsuites>
