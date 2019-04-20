@@ -1597,3 +1597,4 @@
 20190420_211816_test.xml cudnn::26181929::2019/04/17::google::26002123::2019/03/21::Quadro RTX 5000::cudnn dev::
 20190420_215317_test.xml cudnn::26196506::2019/04/20::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn_v7.6::
 20190420_215410_test.xml cudnn::26196506::2019/04/20::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn_v7.6::
+20190420_221552_test.xml cudnn::26196506::2019/04/20::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn_v7.6::
