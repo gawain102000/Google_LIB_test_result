@@ -1594,3 +1594,4 @@
 20190420_202037_test.xml cudnn::26181929::2019/04/17::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn dev::
 20190420_202413_test.xml cudnn::26181929::2019/04/17::google::26002123::2019/03/21::TITAN V::cudnn dev::
 20190420_204303_test.xml cudnn::26181929::2019/04/17::google::26002123::2019/03/21::Tesla P4::cudnn dev::
+20190420_211816_test.xml cudnn::26181929::2019/04/17::google::26002123::2019/03/21::Quadro RTX 5000::cudnn dev::
