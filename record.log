@@ -1806,3 +1806,4 @@
 20190504_212554_test.xml cudnn::26260864::2019/05/02::google::26002123::2019/03/21::Quadro RTX 5000::cudnn dev::
 20190504_214733_test.xml cudnn::26270455::2019/05/04::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn_v7.6::
 20190504_215051_test.xml cudnn::26270455::2019/05/04::google::26002123::2019/03/21::Tesla V100-DGXS-16GB::cudnn_v7.6::
+20190504_220109_test.xml cudnn::26270455::2019/05/04::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn_v7.6::
