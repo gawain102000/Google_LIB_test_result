@@ -1908,3 +1908,4 @@
 20190518_220925_test.xml cudnn::26393593::2019/05/18::google::26002123::2019/03/21::Tesla V100-DGXS-16GB::cudnn_v7.6::
 20190518_221802_test.xml cudnn::26393593::2019/05/18::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn_v7.6::
 20190518_222017_test.xml cudnn::26393593::2019/05/18::google::26002123::2019/03/21::Tesla V100-DGXS-16GB::cudnn_v7.6::
+20190518_222834_test.xml cudnn::26393593::2019/05/18::google::26002123::2019/03/21::GeForce RTX 2080 Ti::cudnn_v7.6::
