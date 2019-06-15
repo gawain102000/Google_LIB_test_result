@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="cudnn_test" tests="1" failures="0" errors="1">
+    <testcase name="cudnn_test" status="run" duration="9" time="9"><error message="exited with error code 139"></error></testcase>
+    <system-out><![CDATA[WARNING: Logging before InitGoogleLogging() is written to STDERR
+I0615 20:32:11.866034  6075 cudnn_util.cc:68] Running cuDNN v8.0.0 for CUDA 10.0.20 on Quadro RTX 5000
+[==========] Running 7875 tests from 7 test suites.
+[----------] Global test environment set-up.
+[----------] 3 tests from ConvolutionTest
+[ RUN      ] ConvolutionTest.GetWorkspaceSize_Overflow
+[       OK ] ConvolutionTest.GetWorkspaceSize_Overflow (1 ms)
+[ RUN      ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range
+[       OK ] ConvolutionTest.GetConvolutionDesciptor_ArrayLengthRequested_Range (0 ms)
+[ RUN      ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim
+[       OK ] ConvolutionTest.GetGroupedConvolutionForwardOutputDim (0 ms)
+[----------] 3 tests from ConvolutionTest (1 ms total)
+
+[----------] 24 tests from FromFile/ConvolutionTest
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_TRUE_HALF_CONFIG_Unsupported (78 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError
+cudnn_conv_test.cc:301: Failure
+Value of: IsOk(RunConvolution(1.0, 0.0, handle, reference, ref_algo))
+  Actual: false (cuDNN error 'CUDNN_STATUS_EXECUTION_FAILED'
+in cudnn_conv_test.cc(213): 'RunConvolution( handle, algo, alpha, beta, convolution.input_desc, convolution.input_data, convolution.filter_desc, convolution.filter_data, convolution.conv_desc, convolution.output_desc, convolution.output_data, workspace, workspace_size)')
+Expected: true
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/NHWC_FLOAT_CONFIG_InternalError, where GetParam() = 
+reference {
+  input {
+    dimension: 1
+    dimension: 16
+    dimension: 81
+    dimension: 47
+    data_type: DATA_FLOAT
+    format: TENSOR_NHWC
+  }
+  filter {
+    dimension: 1
+    dimension: 16
+    dimension: 8
+    dimension: 11
+    data_type: DATA_FLOAT
+    format: TENSOR_NHWC
+  }
+  convolution {
+    pad: 4
+    pad: 5
+    compute_mode: DATA_FLOAT
+  }
+  fwd_algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+  label: "NHWC_FLOAT_CONFIG_InternalError"
+}
+ (131 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash
+[       OK ] FromFile/ConvolutionTest.CompareResults/NHWC_PSEUDO_HALF_CONFIG_Crash (278 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect (169 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails (145 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (9987120 elements differ more than 1. Largest differences:
+[7]: 15.0391 vs nan, error = nan
+[5]: 14.4766 vs nan, error = nan
+[6]: 15.8594 vs nan, error = nan
+[2]: 14 vs nan, error = nan
+[1]: 16.3281 vs nan, error = nan
+[4]: 14.3438 vs nan, error = nan
+[0]: 14.9922 vs nan, error = nan
+[3]: 15.4922 vs nan, error = nan)
+Expected: true
+format: TENSOR_NCHW
+data_type: DATA_HALF
+compute_mode: DATA_HALF
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7, where GetParam() = 
+reference {
+  input {
+    dimension: 52
+    dimension: 7
+    dimension: 112
+    dimension: 4
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 873
+    dimension: 7
+    dimension: 3
+    dimension: 3
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    compute_mode: DATA_DOUBLE
+  }
+  fwd_algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+  label: "CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7"
+}
+test {
+  input {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  filter {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  convolution {
+    compute_mode: DATA_HALF
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_FWD
+  label: "NCHW_TENSOR_OP"
+}
+ (4308 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/BlendResult
+cudnn_conv_test.cc:301: Failure
+Value of: IsOk(RunConvolution(1.0, 0.0, handle, reference, ref_algo))
+  Actual: false (cuDNN error 'CUDNN_STATUS_EXECUTION_FAILED'
+in cudnn_conv_test.cc(213): 'RunConvolution( handle, algo, alpha, beta, convolution.input_desc, convolution.input_data, convolution.filter_desc, convolution.filter_data, convolution.conv_desc, convolution.output_desc, convolution.output_data, workspace, workspace_size)')
+Expected: true
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/BlendResult, where GetParam() = 
+reference {
+  input {
+    dimension: 1
+    dimension: 1
+    dimension: 128
+    dimension: 128
+    data_type: DATA_FLOAT
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 1
+    dimension: 1
+    dimension: 3
+    dimension: 3
+    data_type: DATA_FLOAT
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 1
+    pad: 1
+    compute_mode: DATA_FLOAT
+  }
+  one_minus_alpha: 0.3
+  beta: 0.4
+  fwd_algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+  label: "BlendResult"
+}
+test {
+  all_algos: CONVOLUTION_FWD
+}
+ (109 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution
+cudnn_conv_test.cc:301: Failure
+Value of: IsOk(RunConvolution(1.0, 0.0, handle, reference, ref_algo))
+  Actual: false (cuDNN error 'CUDNN_STATUS_EXECUTION_FAILED'
+in cudnn_conv_test.cc(213): 'RunConvolution( handle, algo, alpha, beta, convolution.input_desc, convolution.input_data, convolution.filter_desc, convolution.filter_data, convolution.conv_desc, convolution.output_desc, convolution.output_data, workspace, workspace_size)')
+Expected: true
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/GroupedConvolution, where GetParam() = 
+reference {
+  input {
+    dimension: 1
+    dimension: 10
+    dimension: 13
+    dimension: 13
+    data_type: DATA_FLOAT
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 35
+    dimension: 2
+    dimension: 3
+    dimension: 3
+    data_type: DATA_FLOAT
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 1
+    pad: 1
+    compute_mode: DATA_FLOAT
+    group_count: 5
+  }
+  output {
+    dimension: 1
+    dimension: 35
+    dimension: 13
+    dimension: 13
+    data_type: DATA_FLOAT
+    format: TENSOR_NCHW
+  }
+  fwd_algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+  label: "GroupedConvolution"
+}
+test {
+  all_algos: CONVOLUTION_FWD
+}
+ (350 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/GarbageInWorkspace
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_DATA_ALGO_0
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_DATA_ALGO_1
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_DATA_ALGO_1
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/GarbageInWorkspace, where GetParam() = 
+reference {
+  input {
+    dimension: 128
+    dimension: 1024
+    dimension: 14
+    dimension: 14
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    dimension: 2048
+    dimension: 1024
+    dimension: 1
+    dimension: 1
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    filter_stride: 2
+    filter_stride: 2
+    compute_mode: DATA_FLOAT
+    mode: CROSS_CORRELATION
+    math_type: DEFAULT_MATH
+  }
+  output {
+    dimension: 128
+    dimension: 2048
+    dimension: 7
+    dimension: 7
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  bwd_data_algo: CONVOLUTION_BWD_DATA_ALGO_0
+  label: "GarbageInWorkspace"
+}
+test {
+  convolution {
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_BWD_DATA
+}
+test {
+  input {
+    format: TENSOR_NHWC
+  }
+  filter {
+    format: TENSOR_NHWC
+  }
+  convolution {
+    math_type: TENSOR_OP_MATH
+  }
+  output {
+    format: TENSOR_NHWC
+  }
+  all_algos: CONVOLUTION_BWD_DATA
+}
+ (294 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_0
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_1
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_0
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_1
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect, where GetParam() = 
+reference {
+  input {
+    dimension: 128
+    dimension: 128
+    dimension: 56
+    dimension: 56
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    dimension: 256
+    dimension: 128
+    dimension: 3
+    dimension: 3
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  convolution {
+    pad: 1
+    pad: 1
+    filter_stride: 1
+    filter_stride: 1
+    compute_mode: DATA_FLOAT
+    mode: CROSS_CORRELATION
+    math_type: DEFAULT_MATH
+  }
+  output {
+    dimension: 128
+    dimension: 256
+    dimension: 56
+    dimension: 56
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  bwd_filter_algo: CONVOLUTION_BWD_FILTER_ALGO_0
+  label: "CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect"
+}
+test {
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+test {
+  convolution {
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+values_lower_bound: 0.1
+values_upper_bound: 0.1
+ (179 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/FlakyMismatch
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_0
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_1
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_0
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_1
+[  FAILED  ] FromFile/ConvolutionTest.CompareResults/FlakyMismatch, where GetParam() = 
+reference {
+  input {
+    dimension: 256
+    dimension: 3
+    dimension: 224
+    dimension: 224
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    dimension: 64
+    dimension: 3
+    dimension: 7
+    dimension: 7
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  convolution {
+    pad: 3
+    pad: 3
+    filter_stride: 2
+    filter_stride: 2
+    compute_mode: DATA_FLOAT
+    mode: CROSS_CORRELATION
+    math_type: DEFAULT_MATH
+  }
+  output {
+    dimension: 256
+    dimension: 64
+    dimension: 112
+    dimension: 112
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  bwd_filter_algo: CONVOLUTION_BWD_FILTER_ALGO_0
+  label: "FlakyMismatch"
+}
+test {
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+test {
+  convolution {
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+values_lower_bound: 0.001
+values_upper_bound: 0.001
+ (106 ms)
+[ RUN      ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_INPUT_1x32x50x50x6x6_Incorrect
+[       OK ] FromFile/ConvolutionTest.CompareResults/CONVOLUTION_BWD_INPUT_1x32x50x50x6x6_Incorrect (41 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_TRUE_HALF_CONFIG_Unsupported
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_TRUE_HALF_CONFIG_Unsupported (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_FLOAT_CONFIG_InternalError
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_FLOAT_CONFIG_InternalError (0 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_PSEUDO_HALF_CONFIG_Crash
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/NHWC_PSEUDO_HALF_CONFIG_Crash (0 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_1025x64x7x33_96x64x7x11_VALID_Incorrect (0 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_NCHW_TRUE_HALF_29x2x864x1556_2x2x3x3_SAME_Fails (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_FWD_NCHW_TENSOR_OP_52x7x112x4_873x7x3x3_VALID_GetAlgo_v7 (0 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/BlendResult
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/BlendResult (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/GroupedConvolution
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/GroupedConvolution (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/GarbageInWorkspace
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/GarbageInWorkspace (0 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_FILTER_128x128x56x56_256x128x3x3_Incorrect (1 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/FlakyMismatch
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/FlakyMismatch (0 ms)
+[ RUN      ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_INPUT_1x32x50x50x6x6_Incorrect
+[       OK ] FromFile/ConvolutionTest.GetAlgorithm_v7/CONVOLUTION_BWD_INPUT_1x32x50x50x6x6_Incorrect (0 ms)
+[----------] 24 tests from FromFile/ConvolutionTest (6194 ms total)
+
+[----------] 1704 tests from Conv2dFilter3x3/ConvolutionTest
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+[  FAILED  ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID, where GetParam() = 
+reference {
+  input {
+    dimension: 1
+    dimension: 1195
+    dimension: 21
+    dimension: 10
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 97
+    dimension: 1195
+    dimension: 3
+    dimension: 3
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    compute_mode: DATA_DOUBLE
+  }
+  one_minus_alpha: 0.999628079962808
+  fwd_algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+  label: "CONVOLUTION_FWD_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID"
+}
+test {
+  input {
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  convolution {
+    compute_mode: DATA_FLOAT
+    math_type: DEFAULT_MATH
+  }
+  all_algos: CONVOLUTION_FWD
+}
+ (10 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_BWD_DATA_ALGO_1
+[  FAILED  ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID, where GetParam() = 
+reference {
+  input {
+    dimension: 1
+    dimension: 1195
+    dimension: 21
+    dimension: 10
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 97
+    dimension: 1195
+    dimension: 3
+    dimension: 3
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    compute_mode: DATA_DOUBLE
+  }
+  one_minus_alpha: 0.995418098510882
+  bwd_data_algo: CONVOLUTION_BWD_DATA_ALGO_1
+  label: "CONVOLUTION_BWD_DATA_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID"
+}
+test {
+  input {
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  convolution {
+    compute_mode: DATA_FLOAT
+    math_type: DEFAULT_MATH
+  }
+  all_algos: CONVOLUTION_BWD_DATA
+}
+ (6 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_0
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NHWC
+data_type: DATA_HALF
+compute_mode: DATA_FLOAT
+math_type: DEFAULT_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_1
+[  FAILED  ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID, where GetParam() = 
+reference {
+  input {
+    dimension: 1
+    dimension: 1195
+    dimension: 21
+    dimension: 10
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 97
+    dimension: 1195
+    dimension: 3
+    dimension: 3
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    compute_mode: DATA_DOUBLE
+  }
+  one_minus_alpha: 0.98095238095238091
+  bwd_filter_algo: CONVOLUTION_BWD_FILTER_ALGO_1
+  label: "CONVOLUTION_BWD_FILTER_NHWC_PSEUDO_HALF_1x1195x21x10_97x1195x3x3_VALID"
+}
+test {
+  input {
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  filter {
+    data_type: DATA_HALF
+    format: TENSOR_NHWC
+  }
+  convolution {
+    compute_mode: DATA_FLOAT
+    math_type: DEFAULT_MATH
+  }
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+ (6 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NCHW
+data_type: DATA_HALF
+compute_mode: DATA_HALF
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NCHW
+data_type: DATA_HALF
+compute_mode: DATA_HALF
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+cudnn_conv_test.cc:459: Failure
+Value of: IsOk(TensorDataEqual(ref_result_data, *result_data, *result_desc, tolerance))
+  Actual: false (CUDA Runtime API error 'invalid argument'
+in test_util.cc(57): 'GetStatus(cudaHostGetDevicePointer(&dev_dst, dst, 0))'
+in test_util.cc(114): 'CopyToHost(buf_first, dev_first + i, n)')
+Expected: true
+format: TENSOR_NCHW
+data_type: DATA_HALF
+compute_mode: DATA_HALF
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED
+[  FAILED  ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID, where GetParam() = 
+reference {
+  input {
+    dimension: 4
+    dimension: 454
+    dimension: 525
+    dimension: 22
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 105
+    dimension: 454
+    dimension: 3
+    dimension: 3
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    compute_mode: DATA_DOUBLE
+  }
+  one_minus_alpha: 0.99902104747919729
+  fwd_algo: CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM
+  label: "CONVOLUTION_FWD_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID"
+}
+test {
+  input {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  filter {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  convolution {
+    compute_mode: DATA_HALF
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_FWD
+}
+ (146 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID
+cudnn_conv_test.cc:453: Failure
+Value of: IsOk(status)
+  Actual: false (cuDNN error 'CUDNN_STATUS_EXECUTION_FAILED'
+in cudnn_conv_test.cc(213): 'RunConvolution( handle, algo, alpha, beta, convolution.input_desc, convolution.input_data, convolution.filter_desc, convolution.filter_data, convolution.conv_desc, convolution.output_desc, convolution.output_data, workspace, workspace_size)')
+Expected: true
+format: TENSOR_NCHW
+data_type: DATA_HALF
+compute_mode: DATA_HALF
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_DATA_ALGO_1
+[  FAILED  ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_DATA_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID, where GetParam() = 
+reference {
+  input {
+    dimension: 4
+    dimension: 454
+    dimension: 525
+    dimension: 22
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 105
+    dimension: 454
+    dimension: 3
+    dimension: 3
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    compute_mode: DATA_DOUBLE
+  }
+  one_minus_alpha: 0.99576719576719575
+  bwd_data_algo: CONVOLUTION_BWD_DATA_ALGO_1
+  label: "CONVOLUTION_BWD_DATA_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID"
+}
+test {
+  input {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  filter {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  convolution {
+    compute_mode: DATA_HALF
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_BWD_DATA
+}
+ (256 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID
+cudnn_conv_test.cc:453: Failure
+Value of: IsOk(status)
+  Actual: false (cuDNN error 'CUDNN_STATUS_EXECUTION_FAILED'
+in cudnn_conv_test.cc(213): 'RunConvolution( handle, algo, alpha, beta, convolution.input_desc, convolution.input_data, convolution.filter_desc, convolution.filter_data, convolution.conv_desc, convolution.output_desc, convolution.output_data, workspace, workspace_size)')
+Expected: true
+format: TENSOR_NCHW
+data_type: DATA_HALF
+compute_mode: DATA_HALF
+math_type: TENSOR_OP_MATH
+algo: CONVOLUTION_BWD_FILTER_ALGO_1
+[  FAILED  ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_BWD_FILTER_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID, where GetParam() = 
+reference {
+  input {
+    dimension: 4
+    dimension: 454
+    dimension: 525
+    dimension: 22
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  filter {
+    dimension: 105
+    dimension: 454
+    dimension: 3
+    dimension: 3
+    data_type: DATA_DOUBLE
+    format: TENSOR_NCHW
+  }
+  convolution {
+    pad: 0
+    pad: 0
+    compute_mode: DATA_DOUBLE
+  }
+  one_minus_alpha: 0.99991341991341987
+  bwd_filter_algo: CONVOLUTION_BWD_FILTER_ALGO_1
+  label: "CONVOLUTION_BWD_FILTER_NCHW_TENSOR_OP_4x454x525x22_105x454x3x3_VALID"
+}
+test {
+  input {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  filter {
+    data_type: DATA_HALF
+    format: TENSOR_NCHW
+  }
+  convolution {
+    compute_mode: DATA_HALF
+    math_type: TENSOR_OP_MATH
+  }
+  all_algos: CONVOLUTION_BWD_FILTER
+}
+ (485 ms)
+[ RUN      ] Conv2dFilter3x3/ConvolutionTest.CompareResults/CONVOLUTION_FWD_NHWC_FLOAT_3x1365x116x8_501x1365x3x3_VALID]]></system-out>
+  </testsuite>
+</testsuites>
